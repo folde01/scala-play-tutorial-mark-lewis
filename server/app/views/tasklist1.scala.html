@@ -1,0 +1,11 @@
+@* tasklist1 Template File *@
+@(tasks: Seq[String])
+
+@main("Task List") {
+    <h2>Task list</h2>
+    <ul>
+        @for(task <- tasks) {
+            <li>@task</li>
+        }
+    </ul>
+}
