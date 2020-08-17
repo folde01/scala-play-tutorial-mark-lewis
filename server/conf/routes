@@ -17,6 +17,7 @@ POST        /createUser1                                       controllers.TaskL
 GET         /taskList1                                         controllers.TaskList1.taskList
 GET         /logout1                                           controllers.TaskList1.logout
 POST        /addTask1                                          controllers.TaskList1.addTask
+POST        /deleteTask1                                          controllers.TaskList1.deleteTask
 
 
 
