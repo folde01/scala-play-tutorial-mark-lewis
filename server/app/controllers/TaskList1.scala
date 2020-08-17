@@ -5,7 +5,7 @@ import models.TaskListInMemoryModel
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 @Singleton
-class TaskList1 @Inject()(cc: ControllerComponents) extends AbstractController(cc)  {
+class TaskList1 @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
   def login() = Action { implicit request =>
     Ok(views.html.login1())
@@ -48,7 +48,19 @@ class TaskList1 @Inject()(cc: ControllerComponents) extends AbstractController(c
   def logout = Action {
     Redirect(routes.TaskList1.login()).withNewSession
 
-}
+  }
+
+  def addTask = Action { implicit request =>
+    val usernameOption = request.session.get("username")
+    usernameOption.map { username =>
+      val postVals = request.body.asFormUrlEncoded
+      postVals.map { args =>
+        val task = args("newTask").head
+        TaskListInMemoryModel.addTask(username, task)
+        Redirect(routes.TaskList1.taskList())
+      }.getOrElse(Redirect(routes.TaskList1.taskList()))
+    }.getOrElse(Redirect(routes.TaskList1.login()))
+  }
 
   def product(prodName: String, prodNum: Int) = Action {
     Ok(s"name: $prodName, num: $prodNum")
