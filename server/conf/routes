@@ -12,7 +12,10 @@ GET         /login1                                            controllers.TaskL
 GET         /validateLoginGet                                  controllers.TaskList1.validateLoginGet(username, password)
 + nocsrf
 POST        /validatePost1                                 controllers.TaskList1.validateLoginPost
++ nocsrf
+POST        /createUser1                                 controllers.TaskList1.createUser
 GET         /taskList1                                         controllers.TaskList1.taskList
+
 
 
 # Prefix must match `play.assets.urlPrefix`
